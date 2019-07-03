@@ -26,5 +26,27 @@ var threeSum = function(nums) {
     return res;
 };
 
-const res = threeSum([-1, 0, 1, 2, -1, -4]);
+var threeSum2 = function(nums) {
+    const res = [];
+    const hash = {};
+    nums.sort((a, b) => a - b);
+    for(let i = 0; i < nums.length; i++) {
+        if(nums[i] > 0) break;
+        for(let j = i + 1; j < nums.length; j++) {
+            if (hash[nums[j]]) {
+                const [second, last, index] = hash[nums[j]];
+                if (index.indexOf(j) > -1) continue;
+                const arr = [nums[j], second, last].sort((a, b) => a - b);
+                const isIn = res.some(item => JSON.stringify(arr) === JSON.stringify(item));
+                if(!isIn) res.push(arr);
+            } else {
+                const remain = 0 - nums[i] - nums[j];
+                hash[remain] = [nums[i], nums[j], [i, j]];
+            }
+        }
+    }
+    return res;
+};
+
+const res = threeSum2([1,2,-2,-1]);
 console.log(res);
