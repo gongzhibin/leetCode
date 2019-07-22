@@ -36,7 +36,7 @@ process.nextTick(() => { // 微1
     })
 }) 
     
-setImmediate(() => { // 微2 （理解错误，为宏任务，且优先级较低）
+setImmediate(() => { // 微2 （// 宏3，理解错误，为宏任务，且优先级较低）
     console.log('g');
 })
 // 我的 b d e g f a h c
